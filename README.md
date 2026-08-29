@@ -1,6 +1,3 @@
-Absolutely. Replace everything in your `README.md` with the following **complete version**:
-
-````markdown
 # SNN-Based Conditional GAN for Image Colorization
 
 A Spiking Neural Network (SNN) implementation of a Pix2Pix conditional GAN for grayscale-to-color image translation, developed as an algorithmic proof-of-concept for potential deployment on neuromorphic hardware.
@@ -31,13 +28,13 @@ The project was developed as part of a broader neuromorphic computing research e
 
 The generator is a 5-level U-Net encoder-decoder operating on `128 × 128` images.
 
-- Input: 1-channel Lab `L` image
-- Output: 2-channel `a,b` chrominance prediction
-- Encoder-decoder structure with skip connections
-- Hidden layers use LIF spiking neurons
-- Maximum hidden width: 256 channels
-- Approximately 5.2M trainable parameters
-- Simulation over `T` timesteps
+* Input: 1-channel Lab `L` image
+* Output: 2-channel `a,b` chrominance prediction
+* Encoder-decoder structure with skip connections
+* Hidden layers use LIF spiking neurons
+* Maximum hidden width: 256 channels
+* Approximately 5.2M trainable parameters
+* Simulation over `T` timesteps
 
 ### Discriminator
 
@@ -50,38 +47,40 @@ The discriminator is used only during training and is not part of the SNN infere
 ### Overall Pipeline
 
 ```text
-                 Grayscale Image
-                       │
-                       ▼
-                  RGB → Lab
-                       │
-                       ▼
-                    L Channel
-                       │
-                       ▼
-                 U-Net Generator
-                       │
-                LIF Spiking Layers
-                       │
-                 T Simulation Steps
-                       │
-                       ▼
-          Membrane-Potential Decoder
-                       │
-                       ▼
-                  Predicted a,b
-                       │
-             ┌─────────┴─────────┐
-             │                   │
-        Original L          Predicted a,b
-             │                   │
-             └─────────┬─────────┘
-                       ▼
-                    Lab → RGB
-                       │
-                       ▼
-                Colorized Image
-````
+             Grayscale Image
+                    │
+                    ▼
+                RGB → Lab
+                    │
+                    ▼
+                 L Channel
+                    │
+                    ▼
+              U-Net Generator
+                    │
+                    ▼
+              LIF Spiking Layers
+                    │
+                    ▼
+              T Simulation Steps
+                    │
+                    ▼
+        Membrane-Potential Decoder
+                    │
+                    ▼
+              Predicted a,b
+                    │
+           ┌────────┴────────┐
+           │                 │
+      Original L       Predicted a,b
+           │                 │
+           └────────┬────────┘
+                    ▼
+                 Lab → RGB
+                    │
+                    ▼
+              Colorized Image
+```
 
 ## Why Lab Color Space?
 
@@ -235,6 +234,7 @@ At `T=1`, the model produced:
 
 ```text
 Firing rate = 0
+
 Mean absolute output difference between
 real-image input and random-noise input = 0.0
 ```
